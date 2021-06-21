@@ -1,7 +1,9 @@
 import serial  #引用pyserial 模組
 import random
 import time
-COM_PORT='COM3'  #指定通訊埠
+#COM_PORT='COM3'  #指定通訊埠
+COM_PORT='COM6'  #指定通訊埠
+#COM_PORT='COM7'  #指定通訊埠
 BAUD_RATES =9600 #設定傳輸速率
 ser = None
 
