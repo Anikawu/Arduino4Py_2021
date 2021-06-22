@@ -20,7 +20,7 @@ def receiveData():
             data = data_row.decode()  # 預設是用 UTF-8 解碼
             data = data.strip("\r").strip("\n")  # 除去換行符號
             print(data)
-            respText.set(data)
+            respText.set(data)  #設定在可變字串上面
 
         except Exception as e:
             print("Serial closed ...", e)
