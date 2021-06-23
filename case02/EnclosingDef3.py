@@ -1,11 +1,12 @@
-#嵌套函式1
+#嵌套函式3
 #多重相乘
 
 def multi(n):
     if n==0:
         return None
-    def multi(x):
-        return n*x
+    #def multi(x):
+        #return n*x
+    multi = lambda x: n*x
     return multi  #得到第8行的方法參考
 
 if __name__=='__main__':
