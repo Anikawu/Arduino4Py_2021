@@ -22,6 +22,7 @@ print(map)
 maxValue = max(map.values())
 minValue = min(map.values())
 print("max:", maxValue)
+print("min:", minValue)
 
 for k, v in map.items():
     if(v == maxValue):
