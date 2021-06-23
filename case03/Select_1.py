@@ -2,12 +2,19 @@ import sqlite3
 
 conn = sqlite3.connect('demo.db')
 cursor= conn.cursor()
-
+#查詢資料列 META-INFO
+cursor.execute('PRAGMA TABLE_INFO("Lotto")')
+#print(cursor.fetchall())
+names =[t[1] for t in cursor.fetchall()]
+#print(names)
+for name in names:
+    print(name,end='\t')
+print('\n---------------------------------')
 #查詢資料列 sql
 sql ='SELECT id,n1,n1,n3,n4,n5,ts FROM lotto'
 cursor.execute(sql)
 rows=cursor.fetchall()
-print(rows)
+#print(rows)
 
 for r in rows:
     print('{}\t{}\t{}\t{}\t{}\t{}\t{}\t'
