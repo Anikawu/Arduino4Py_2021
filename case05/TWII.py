@@ -14,7 +14,7 @@ csv=csv.replace('-','-1') #-號 變成-1
 rows=csv.split("\r\n") #\r\n標準斷行
 #"1,040.00"  將雙引號裡面的逗號拿掉
 print(len(rows))  #查詢有幾列資料
-#建立資料庫
+
 stocks=[] #建立一個陣列
 for row in rows:
     list = row.split(',')
@@ -24,6 +24,8 @@ for row in rows:
         list[3] = int(list[3]) #股利年度
         list[4] = float(list[4]) #本益比
         list[5] = float(list[5]) #股價淨值比
+        list[7] = '2021-06-23'  # 日期
         stocks.append(tuple(list)) #將list存到陣列
 print(stocks)
 
+#匯入資料庫
