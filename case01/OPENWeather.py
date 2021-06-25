@@ -1,5 +1,14 @@
 import requests
+import urllib.request
 import json
+import ssl
+# 不用驗證 SSL
+ssl._create_default_https_context = ssl._create_unverified_context
+
+def openweatherIcon(icon):
+    img_url = 'https://openweathermap.org/img/wn/%s@2x.png' % icon
+    raw_data = urllib.request.urlopen(img_url).read()
+    return raw_data
 
 def openweather():
     city = 'taoyuan'
@@ -27,3 +36,4 @@ def openweather():
 if __name__ == '__main__':
     status_code, main, icon, temp, feels_like, humidity = openweather()
     print(status_code, main, icon, temp, feels_like, humidity)
+    print(openweatherIcon(icon))
