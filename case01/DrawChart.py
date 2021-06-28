@@ -19,8 +19,10 @@ plt.plot(df['ts'], df['humi'], label="humi")  # 繪製折線圖
 plt.grid(True) #加入格線
 #plt.plot(df['NAME'], ma)  # 繪製移動平均線折線圖
 # 圖例
-# plt.xlabel('Name')
-# plt.ylabel('Salary')
+plt.xlabel('time')
+plt.ylabel('value(%)')
+plt.xticks(rotation=90)#x軸資料轉90度
+plt.legend() #圖利
 
 plt.show()
 
