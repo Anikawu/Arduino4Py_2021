@@ -8,16 +8,47 @@ import tkinter
 import serial
 import threading
 import case01.OPENWeather as ow
+import sqlite3
+import time
 from tkinter import font
 from io import BytesIO
 from PIL import Image, ImageTk
 
-COM_PORT = 'COM9'  # 指定通訊埠名稱
+COM_PORT = 'COM8'  # 指定通訊埠名稱
 BAUD_RATES = 9600  # 設定傳輸速率(鮑率)
 play = True
 data=""
-def receiveData():
+conn = sqlite3.connect('iot.db', check_same_thread=False)
 
+def createTable():
+    sql = 'create table if not exists Env(' \
+          'id integer not null primary key autoincrement,' \
+          'cds real,' \
+          'temp real,' \
+          'humi real,' \
+          'ts timestamp default current_timestamp ' \
+          ')'
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    conn.commit()
+
+def insertRecord():
+    sql = "Insert into Env(cds, temp, humi) values(%d, %.1f, %.1f)" % \
+          (int(cdsValue.get().split(" ")[0]),
+           float(tempValue.get().split(" ")[0]),
+           float(humiValue.get().split(" ")[0]))
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    print('last insert record id :', cursor.lastrowid)
+    conn.commit()
+    pass
+
+def execInsertRecord():
+    while play:
+        time.sleep(10)
+        insertRecord()
+
+def receiveData():
     while play:
         try:
             global ser
@@ -60,6 +91,7 @@ def receiveData():
                 print("Serial exception: ", e)
 
             #break
+    conn.close()
 def sendData(n):
     data_row = n + "#" # "#" 代表結束符號
     data = data_row.encode()
@@ -97,7 +129,7 @@ def getOpenWeatherData():
         owmainValue.set('錯誤碼：' + str(status_code))
 
 if __name__ == '__main__':
-
+    #createTable()
     try:
         ser = serial.Serial(COM_PORT, BAUD_RATES)
     except Exception as e:
@@ -187,5 +219,8 @@ if __name__ == '__main__':
 
     t2 = threading.Thread(target=getOpenWeatherData)
     t2.start()
+
+    t3 = threading.Thread(target=execInsertRecord)
+    t3.start()
 
     root.mainloop()
