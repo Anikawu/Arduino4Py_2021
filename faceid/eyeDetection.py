@@ -46,7 +46,6 @@ while True:
             minNeighbors=5,  # 每個目標至少要檢測到幾次以上,才被認定是真數據
             minSize=(30, 30),  # 數據搜尋的最小尺寸
             flags=cv2.CASCADE_SCALE_IMAGE
-
         )
 
 
@@ -54,6 +53,8 @@ while True:
         # 在眼部周圍畫矩形框
     for (x, y, w, h) in eyes:
         cv2.rectangle(roi_frame, (x, y), (x + w, y + h), (0, 255, 0), 5)
+        # 在嘴巴周圍畫矩形框
+
     # 顯示在 frame UI 上面
     cv2.imshow('My Video', frame)
     # 按下 q 離開迴圈
