@@ -23,7 +23,7 @@ plt.xlabel('time')
 plt.ylabel('value(%)')
 plt.xticks(rotation=90)#x軸資料轉90度
 plt.legend() #圖利
-
+plt.tight_layout()
 plt.show()
 
 conn.close()

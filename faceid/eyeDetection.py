@@ -1,6 +1,6 @@
 import cv2
 
-eyes_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_eye.xml')
+eyes_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_eye_tree_eyeglasses.xml')
 face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_alt.xml')
 
 # 設定 Webcam 位置
@@ -30,21 +30,30 @@ while True:
         flags=cv2.CASCADE_SCALE_IMAGE
 
     )
-    # 畫出每一隻眼的範圍
-    eyes = eyes_cascade.detectMultiScale(
-        gray,  # 待檢測圖片,一般設定灰度圖像可以加快檢測數度
-        scaleFactor=1.1,  # 檢測粒度,若粒度增加會加速檢測速度,但會影響準確率
-        minNeighbors=5,  # 每個目標至少要檢測到幾次以上,才被認定是真數據
-        minSize=(30, 30),  # 數據搜尋的最小尺寸
-        flags=cv2.CASCADE_SCALE_IMAGE
-    )
+
 
     # 在臉部周圍畫矩形框
     for (x, y, w , h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 5)
-        # 在臉部周圍畫矩形框
+
+        #獲取眼睛
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_frame = frame[y:y+h, x:x+w]
+        # 畫出每一隻眼的範圍
+        eyes = eyes_cascade.detectMultiScale(
+            roi_gray,  # 待檢測圖片,一般設定灰度圖像可以加快檢測數度
+            scaleFactor=1.1,  # 檢測粒度,若粒度增加會加速檢測速度,但會影響準確率
+            minNeighbors=5,  # 每個目標至少要檢測到幾次以上,才被認定是真數據
+            minSize=(30, 30),  # 數據搜尋的最小尺寸
+            flags=cv2.CASCADE_SCALE_IMAGE
+
+        )
+
+
+
+        # 在眼部周圍畫矩形框
     for (x, y, w, h) in eyes:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 5)
+        cv2.rectangle(roi_frame, (x, y), (x + w, y + h), (0, 255, 0), 5)
     # 顯示在 frame UI 上面
     cv2.imshow('My Video', frame)
     # 按下 q 離開迴圈
