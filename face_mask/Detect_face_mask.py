@@ -1,5 +1,5 @@
 import cv2
-
+#souce https://github.com/Shaligram1234/Python/tree/master/Face_Mask_Detection
 # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
 
 face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_default.xml')
