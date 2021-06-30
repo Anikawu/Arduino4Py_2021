@@ -151,7 +151,7 @@ if __name__ == '__main__':
     yellow_photo = ImageTk.PhotoImage(Image.open('yellow.png'))
     door_open_photo = ImageTk.PhotoImage(Image.open('door_open.png'))
     door_close_photo = ImageTk.PhotoImage(Image.open('door_close.png'))
-
+    face_photo = ImageTk.PhotoImage(Image.open('face.png'))
     # 爬蟲 Openweather -----------------------------------------------------------------
     owmainValue = tkinter.StringVar()
     owmainValue.set("")
@@ -182,6 +182,7 @@ if __name__ == '__main__':
     sendButton2  = tkinter.Button(text='2', image=green_photo, command=lambda: sendData('2'), font=myfont2)
     sendButton3  = tkinter.Button(text='3', image=yellow_photo, command=lambda: sendData('3'), font=myfont2)
     sendButton4  = tkinter.Button(text='4', image=door_close_photo, command=lambda: openTheDoor(), font=myfont2)
+    sendButton5  = tkinter.Button(text='5', image=face_photo, command =lambda: openTheDoor(), font=myfont2)
     # 爬蟲 Openweather -----------------------------------------------------------------
     owmainButton = tkinter.Button(textvariable=owmainValue, command=lambda: getOpenWeatherData(), font=myfont2)
     owiconLabel = tkinter.Label(root, image=None)
@@ -201,10 +202,11 @@ if __name__ == '__main__':
     sendButton1.grid(row=0,   column=1, columnspan=1, sticky='EWNS')
     sendButton2.grid(row=0,   column=2, columnspan=1, sticky='EWNS')
     sendButton3.grid(row=0,   column=3, columnspan=1, sticky='EWNS')
-    sendButton4.grid(row=0,   column=4, columnspan=2, sticky='EWNS')
+    sendButton4.grid(row=0,   column=4, columnspan=1, sticky='EWNS')
+    sendButton5.grid(row=0, column=5, columnspan=1, sticky='EWNS')
     # 爬蟲 Openweather -----------------------------------------------------------------
     owiconLabel.grid(row=1, column=0, columnspan=1, sticky='EWNS')
-    owmainButton.grid(row=1, column=1, columnspan=2, sticky='EWNS')
+    owmainButton.grid(row=1, column=1, columnspan=1, sticky='EWNS')
     owtempLabel.grid(row=1, column=3, columnspan=1, sticky='EWNS')
     owfeelsLikeLabel.grid(row=1, column=4, columnspan=1, sticky='EWNS')
     owhumidityLabel.grid(row=1, column=5, columnspan=1, sticky='EWNS')

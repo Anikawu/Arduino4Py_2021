@@ -2,10 +2,10 @@ import cv2
 #souce https://github.com/Shaligram1234/Python/tree/master/Face_Mask_Detection
 # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
 
-face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_eye.xml')
-mouth_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_mcs_mouth.xml')
-upper_body = cv2.CascadeClassifier('./haarcascades/haarcascade_upperbody.xml')
+face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_default.haarcascades')
+eye_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_eye.haarcascades')
+mouth_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_mcs_mouth.haarcascades')
+upper_body = cv2.CascadeClassifier('./haarcascades/haarcascade_upperbody.haarcascades')
 
 
 
@@ -76,6 +76,7 @@ while 1:
 
     # Show frame with results
     cv2.imshow('Mask Detection', img)
+    # 按下 q 離開迴圈
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break;
 

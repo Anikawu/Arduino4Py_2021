@@ -1,6 +1,6 @@
 import cv2
 
-face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_alt.xml')
+face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_alt.haarcascades')
 
 # 設定 Webcam 位置
 cap = cv2.VideoCapture(0)
