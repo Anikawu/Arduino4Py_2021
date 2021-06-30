@@ -24,7 +24,7 @@ while True:
     faces = face_cascade.detectMultiScale(
         gray,   #待檢測圖片,一般設定灰度圖像可以加快檢測數度
         scaleFactor=1.1,  #檢測粒度,若粒度增加會加速檢測速度,但會影響準確率
-        minNeighbors=5,   #每個目標至少要檢測到幾次以上,才被認定是真數據
+        minNeighbors=20,   #每個目標至少要檢測到幾次以上,才被認定是真數據
         minSize=(30, 30), #數據搜尋的最小尺寸
         flags=cv2.CASCADE_SCALE_IMAGE
         # CASCADE_DO_CANNY_PRUNING=1 -> 利用canny邊緣檢測來排除一些邊緣很少或者很多的影象區域
@@ -35,6 +35,8 @@ while True:
 
     # 在臉部周圍畫矩形框
     for (x, y, w , h) in faces:
+        #繪文字putText(來源, 文字, 左下座標, 字型大小, 文字顏色, 文字線條寬度)
+        cv2.putText(frame, 'Anika',(x, y-10), cv2.FONT_HERSHEY_COMPLEX, 1.2, (0,255,0),2)
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 5)
 
     # 顯示在 frame UI 上面
